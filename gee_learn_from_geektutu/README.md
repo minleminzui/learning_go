@@ -23,3 +23,9 @@
         - 解析动态路由/hello/:name
         - 存储中间件信息
 ## day3
+- `动态路由`，指一条路由规则可以匹配某一类型而非某一条固定的路由，比如`/hello/:name`可以匹配`/hello/geektutu`，`/hello/jack`等
+- 对于`路由`而言，需要实现注册路由规则，映射handler，访问时，匹配路由规则，查找对应的handler
+- 实现动态路由(利用trie树)
+    - 参数匹配`:`。比如`/p/:lang/doc`,可以匹配`/p/c/doc`和`/p/go/doc`
+    - 通配`*`。比如`/static/*filepath`可以匹配`/static/fav.ico`和`/static/jQuery.js`,这个常用于静态服务器，能够`递归匹配子路径`
+    - `*`和`:`的区别是`*`只能放在最后一个匹配项
