@@ -118,7 +118,7 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			middlewares = append(middlewares, group.middlewares...)
 		}
 	}
-
+	// 一次请求一个Context
 	c := newContext(w, req)
 	c.handlers = middlewares
 	c.engine = engine

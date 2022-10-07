@@ -1,5 +1,6 @@
 >该项目学习自[极客兔兔教程](https://geektutu.com/post/gee.html),意在实现一个Go语言实现的Web框架Gee
 
+![](./panic.jpg)
 ## 序言
 ### net/http
 - 标准库net/http只是提供了基础的Web功能
@@ -49,4 +50,11 @@
     - 前端专注于界面设计实现，只需要考虑拿到数据后如何渲染
 - 实现了
     - `Web框架`支持服务端渲染。服务端渲染需要支持JS，CSS等静态文件。
-    - gee框架需要做的就是解析请求地址，映射到服务器上文件的真实地址，较为`http.FileServer`处理就好
+    - gee框架需要做的就是解析请求地址，映射到服务器上文件的真实地址，交给`http.FileServer`处理就好
+    - 为`Engine`结构体添加了`*template.Template`和`template.FuncMap`对象，前者将所有模板加载进内存，后者是所有的自定义模板渲染函数
+    - 对于`(*Context).HTML()`做修改，使其可以根据模板文件名选择模板进行渲染
+## day7
+- `错误处理`，Go语言中错误处理一般是返回error，对于无法处理的错误，一般是直接panic
+- `defer`会在panic之后，仍然执行defer中的语句，类似与`java`的`try...catch`
+- `recover`函数可以避免整个程序因为`panic`而终止，recover函数只在defer中生效，recover会捕获panic
+- 在Gee中增加`错误处理中间件Recovery`
